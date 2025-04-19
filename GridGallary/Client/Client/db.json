@@ -1,0 +1,17 @@
+{
+  "images": [
+    {
+      "id": "img_123",
+      "url": "https://cdn.site.com/images/img_123.jpg",
+      "description": "A misty mountain in the morning.",
+      "alt_text": "Misty mountain sunrise",
+      "likes": 132,
+      "downloads": 40,
+      "user": {
+        "id": "user_456",
+        "name": "Emily Stone",
+        "avatar_url": "https://cdn.site.com/avatars/emily.jpg"
+      }
+    }
+  ]
+}
