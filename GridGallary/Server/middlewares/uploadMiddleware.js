@@ -5,7 +5,7 @@ const cloudinary = require("../utils/cloudinary");
 const storage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: "unsplash_clone",
+    folder: "uploads",
     allowed_formats: ["jpg", "jpeg", "png"],
   },
 });

@@ -22,9 +22,11 @@ const userSchema = new mongoose.Schema(
     },
     avatar: String,
     bio: String,
-    isAdmin: { type: Boolean, default: false }, 
+    isAdmin: { type: Boolean, default: false },
     followers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     following: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    resetToken: String,
+    resetTokenExpiry: Date,
   },
   { timestamps: true }
 );

@@ -81,7 +81,6 @@ exports.deletePhoto = async function (req, res) {
   }
 };
 
-
 exports.getSinglePhoto = async function (req, res) {
   try {
     const photo = await Photo.findById(req.params.id).populate(
