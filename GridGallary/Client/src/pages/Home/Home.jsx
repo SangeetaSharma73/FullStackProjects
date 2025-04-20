@@ -2,6 +2,7 @@ import React from "react";
 import { FiSearch } from "react-icons/fi";
 import Navbar from "../../components/NavBar";
 import Footer from "../../components/Footer";
+import PhotoUpload from "../../components/PhotoUpload";
 import ImageGallery from "../imageGallery/ImageGallery";
 
 function Home() {
@@ -40,10 +41,16 @@ function Home() {
 
         {/* Scroll Down Indicator */}
         <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
-          <span className="text-white text-sm">Scroll down</span>
+          <span className="text-white text-sm">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2__At4DcMOCIXX1CCdF-gdmYwIFSwpsFBT86dP74PRigBXsG_tLYN6gg4cMM8j3yh-18&usqp=CAU"
+              alt="Arrow Image"
+              className="w-7 rounded-full"
+            />
+          </span>
         </div>
       </div>
-
+      <PhotoUpload />
       <ImageGallery />
       <Footer />
     </div>
