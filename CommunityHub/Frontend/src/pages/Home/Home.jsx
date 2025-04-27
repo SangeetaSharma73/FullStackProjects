@@ -1,119 +1,114 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import { FiSearch } from "react-icons/fi";
+// import React, { useState } from "react";
+// import Navbar from "../../components/NavBar";
+// import Footer from "../../components/Footer";
+// import Feed from "../Feed/Feed";
+// import { FiPlusCircle } from "react-icons/fi";
+
+// function Home() {
+//   const [showModal, setShowModal] = useState(false);
+
+//   return (
+//     <div className="bg-base-200 min-h-screen">
+//       <Navbar />
+
+//       <main className="max-w-3xl mx-auto px-4 py-6 space-y-6">
+//         {/* Create Post Button */}
+//         <div className="flex justify-end">
+//           <button
+//             className="btn btn-primary gap-2"
+//             onClick={() => setShowModal(true)}
+//           >
+//             <FiPlusCircle className="text-lg" />
+//             Create Post
+//           </button>
+//         </div>
+
+//         {/* Feed */}
+//         <Feed />
+//       </main>
+
+//       {/* Modal */}
+//       {showModal && (
+//         <dialog className="modal modal-open">
+//           <div className="modal-box">
+//             <h3 className="font-bold text-lg mb-4">Create a New Post</h3>
+
+//             {/* Post Content Input */}
+//             <div className="form-control mb-3">
+//               <label className="label">
+//                 <span className="label-text">What's on your mind?</span>
+//               </label>
+//               <textarea
+//                 placeholder="Write something..."
+//                 className="textarea textarea-bordered"
+//               ></textarea>
+//             </div>
+
+//             {/* Image Upload */}
+//             <div className="form-control mb-3">
+//               <label className="label">
+//                 <span className="label-text">Upload Image/Video</span>
+//               </label>
+//               <input
+//                 type="file"
+//                 className="file-input file-input-bordered w-full"
+//               />
+//             </div>
+
+//             {/* Modal Actions */}
+//             <div className="modal-action">
+//               <button className="btn" onClick={() => setShowModal(false)}>
+//                 Cancel
+//               </button>
+//               <button className="btn btn-primary">Post</button>
+//             </div>
+//           </div>
+//         </dialog>
+//       )}
+
+//       <Footer />
+//     </div>
+//   );
+// }
+
+// export default Home;
+
+import React, { useState } from "react";
 import axios from "axios";
 import Navbar from "../../components/NavBar";
 import Footer from "../../components/Footer";
+import Feed from "../Feed/Feed";
+import { FiPlusCircle } from "react-icons/fi";
+import PostCreator from "../../components/PostCreator";
 
 function Home() {
-  {
-    /* new code which i put here */
-  }
-  const [feed, setFeed] = useState([]);
-  const [newPost, setNewPost] = useState({
-    type: "food",
-    description: "",
-    location: { lat: 0, lng: 0 },
-  });
-
-  useEffect(() => {
-    // Fetch all posts (Help Requests and Help Offers)
-    axios
-      .get("http://localhost:8000/api/feed")
-      .then((response) => setFeed(response.data));
-  }, []);
-
-  const handlePostChange = (e) => {
-    const { name, value } = e.target;
-    setNewPost({ ...newPost, [name]: value });
+  const [showModal, setShowModal] = useState(false);
+  const onCloseModal = () => {
+    setShowModal(false);
   };
-
-  const handlePostSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .post("http://localhost:8000/api/feed", newPost)
-      .then((response) => {
-        setFeed([response.data, ...feed]); // Add the new post to the feed
-      })
-      .catch((error) => console.error("Error creating post:", error));
-  };
-
   return (
-    <div>
+    <div className="bg-base-200 min-h-screen">
       <Navbar />
-      <div
-        className="relative h-[60vh] w-full flex items-center justify-center bg-cover bg-center bg-no-repeat text-white overflow-hidden"
-        style={{
-          backgroundImage:
-            "url('https://source.unsplash.com/1600x900/?nature,landscape')",
-        }}
-      >
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
 
-        {/* Content */}
-        <div className="relative z-10 text-center px-4 max-w-2xl">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-4">
-            Discover Stunning Free Images
-          </h1>
-          <p className="text-lg sm:text-xl mb-6">
-            Beautiful, high-quality photos curated by our community.
-          </p>
-
-          {/* Search bar */}
-          <div className="flex items-center bg-white/90 rounded-full px-4 py-2 shadow-md w-full max-w-xl mx-auto text-gray-800 focus-within:ring-2 ring-blue-400">
-            <FiSearch size={20} className="mr-3 text-gray-500" />
-            <input
-              type="text"
-              placeholder="Search for photos, people, or topics..."
-              className="flex-grow bg-transparent outline-none placeholder-gray-500"
-            />
-          </div>
+      <main className="max-w-3xl mx-auto px-4 py-6 space-y-6">
+        {/* Create Post Button */}
+        <div className="flex justify-end">
+          <button
+            className="btn btn-primary gap-2"
+            onClick={() => setShowModal(true)}
+          >
+            <FiPlusCircle className="text-lg" />
+            Create Post
+          </button>
         </div>
 
-        {/* Scroll Down Indicator */}
-        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
-          <span className="text-white text-sm">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2__At4DcMOCIXX1CCdF-gdmYwIFSwpsFBT86dP74PRigBXsG_tLYN6gg4cMM8j3yh-18&usqp=CAU"
-              alt="Arrow Image"
-              className="w-7 rounded-full"
-            />
-          </span>
-        </div>
-      </div>
+        {/* Feed */}
+        <Feed />
+      </main>
 
-      {/* new code which i put here */}
-      <div className="home-page">
-        <h2>Feed</h2>
-        <form onSubmit={handlePostSubmit}>
-          <input
-            type="text"
-            name="description"
-            value={newPost.description}
-            onChange={handlePostChange}
-            placeholder="Describe your offer or request"
-          />
-          <select name="type" value={newPost.type} onChange={handlePostChange}>
-            <option value="food">Food</option>
-            <option value="medical">Medical</option>
-            <option value="transport">Transport</option>
-            <option value="other">Other</option>
-          </select>
-          <button type="submit">Post</button>
-        </form>
+      {/* Modal */}
+      {showModal && <PostCreator onClose={onCloseModal} />}
 
-        <div className="posts">
-          {feed.map((post) => (
-            <div key={post._id} className="post">
-              <h4>{post.type}</h4>
-              <p>{post.description}</p>
-              <button>Like</button>
-              <button>Unlike</button>
-            </div>
-          ))}
-        </div>
-      </div>
       <Footer />
     </div>
   );
